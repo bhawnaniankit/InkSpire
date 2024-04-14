@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "post" ADD COLUMN     "createdAt" TIME NOT NULL DEFAULT '2000-01-01 00:00:00 +00:00';

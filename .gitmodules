@@ -1,0 +1,3 @@
+[submodule "MediumFE"]
+	path = MediumFE
+	url = https://github.com/bhawnaniankit/AJsMediumFE.git

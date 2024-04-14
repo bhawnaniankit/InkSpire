@@ -32,7 +32,13 @@ The project is hosted on Vercel. You can access it [here](https://ajsmedium-bhaw
    git clone https://github.com/your-username/medium-clone.git
    
 2. Run npm install for both backend and frontend
-3. Create a database and configure the connection in the .env file.
+   ```bash
+   cd backend
+   npm install
+   ```bash
+   cd ../frontend
+   npm install
+3. Create a database and configure the connection in the .env file.  
 4. Add your acelerate url to wrangler.toml
 5. Add JWT_SECRET
 6. npx prisma migrate dev

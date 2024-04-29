@@ -14,13 +14,13 @@ export const updateBlogInput = z.object({
 
 export const signupInput = z.object({
     name: z.string().min(3, { message: "name must be of length 3" }),
-    username: z.string(),
+    username: z.string().min(3,{message:"Username should have atleast 7 length"}),
     email: z.string().email({ message: "Invalid email" }),
     password: z.string().min(8, { message: "Password must have atleast 8 character" })
 });
 
 export const signinInput = z.object({
-    username: z.string(),
+    username: z.string().min(3,{message:"Username should have atleast 7 length"}),
     password: z.string().min(8, { message: "Password must have atleast 8 character" })
 });
 

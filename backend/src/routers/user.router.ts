@@ -17,9 +17,9 @@ user.get("/:jwt", async (c) => {
     }).$extends(withAccelerate());
     const header = c.req.param("jwt");
     const response = await verify(header, c.env.JWT_KEY).catch(() => {
-        return c.json({ erro: "User Not found" }, 403);
+        c.status(403);
+        return c.json({ erro: "User Not found" });
     });
-    console.log(response);
     const user = await prisma.user.findFirst({
         where: {
             id: response.id
@@ -58,7 +58,7 @@ user.post("/signup", async (c) => {
     }
     catch (error) {
         console.log("Internal server error in signup route in user router\n", error);
-        return c.json({ "msg": "error" })
+        return c.json({ message: "error" },500)
     }
 })
 
@@ -79,7 +79,7 @@ user.post("/signin", async (c) => {
             }
         })
         if (!user) {
-            return c.json({ "error": "user does'nt exist" });
+            return c.json({ "error": "user does'nt exist" }, 403);
         }
         const token = await sign({ id: user.id }, c.env.JWT_KEY);
         return c.json({ jwt: token });

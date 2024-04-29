@@ -3,6 +3,7 @@ import { withAccelerate } from '@prisma/extension-accelerate';
 import { Hono } from 'hono'
 import { verify } from 'hono/jwt'
 import { createBlogInput, CreateBlogInput, updateBlogInput, UpdateBlogInput } from "@aj_devs/common-final"
+import { cors } from 'hono/cors';
 
 const blog = new Hono<{
     Bindings: {
@@ -13,6 +14,7 @@ const blog = new Hono<{
         id: string
     }
 }>();
+// blog.use(cors())
 
 blog.use("/*", async (c, next) => {
     const header = c.req.header("Authorization") || "";
@@ -85,10 +87,12 @@ blog.put("/", async (c) => {
 
 // add pagination
 blog.get("/bulk", async (c) => {
+    try{
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL
     }).$extends(withAccelerate())
-
+    
+    const payload=c.req.query()
     const blogs = await prisma.post.findMany({
         where: {
             published: true
@@ -103,9 +107,16 @@ blog.get("/bulk", async (c) => {
                     name: true
                 }
             }
-        }
+        },
+        skip:parseInt(payload.skip),
+        take:parseInt(payload.take)
     });
-    return c.json(blogs);
+        return c.json(blogs);
+    }
+    catch(e){
+        console.log(e);
+        return c.json(e,401)
+    }
 })
 
 blog.get("/:id", async (c) => {

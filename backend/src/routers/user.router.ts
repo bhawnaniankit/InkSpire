@@ -41,9 +41,9 @@ user.post("/signup", async (c) => {
         }).$extends(withAccelerate())
 
         const payload: SignupInput = await c.req.json();
-        const { success } = signupInput.safeParse(payload);
-        if (!success) {
-            return c.json({ message: "Invalid Inputs" }, 411);
+        const  res  = signupInput.safeParse(payload);
+        if (!res.success) {
+            return c.json({message:res.error.issues[0]?.message}, 411);
         }
         const new_user = await prisma.user.create({
             data: {

@@ -85,7 +85,6 @@ blog.put("/", async (c) => {
     }
 })
 
-// add pagination
 blog.get("/bulk", async (c) => {
     try{
     const prisma = new PrismaClient({
@@ -174,5 +173,21 @@ blog.put("/publish/:id", async (c) => {
         return c.json({ error: "Internal Server error" }, 500);
     }
 })
+
+blog.post("/test", async (c)=>{
+    try {
+        const prisma = new PrismaClient({
+            datasourceUrl: c.env.DATABASE_URL
+        }).$extends(withAccelerate());
+        console.log("Got a req from google api");
+        console.log(c.req.header("X-Goog-Resource-ID"));
+        console.log(c.req.header("X-Goog-Resource-URI"))
+        
+        return c.json({},200);
+    }
+    catch (error) {
+        return c.json({ msg: "Internal sever error " }, 500);
+    }
+});
 
 export default blog;

@@ -1,6 +1,6 @@
-# Medium Clone
+# InkSpire
 
-This project is a clone of the popular blogging platform Medium, built with React, Tailwind CSS, Hono for serverless backend, TypeScript, a custom npm package, Prisma as the ORM, PostgreSQL as the database, and `acclerate` for connection pooling.
+This project is a blogging platform like Medium, built with React, Tailwind CSS, Hono for serverless backend, TypeScript, a custom npm package, Prisma as the ORM, PostgreSQL as the database, and `acclerate` for connection pooling.
 
 ## Features
 
@@ -15,7 +15,7 @@ This project is a clone of the popular blogging platform Medium, built with Reac
 
 ## Demo
 
-The project is hosted on Vercel. You can access it [here](https://ajsmedium-bhawnaniankits-projects.vercel.app/).
+The project is hosted on Vercel. You can access it [here](https://ajsmedium.vercel.app/).
 
 ## Getting Started
 
